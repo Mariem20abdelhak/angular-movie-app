@@ -1,1 +1,23 @@
-<p>liste-films works!</p>
+<h2>Liste des Films</h2>
+<div class="bloc">
+  <div *ngFor="let f of tabFilms ; let index=index"
+      [ngStyle]="{backgroundColor: getColor(f.nbJaime, f.nbJeNaimeps)}">
+
+    <h4>Nom du film : {{f.nomFilm}}</h4>
+
+    <div *ngIf="f.disponible; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>{{f.nomFilm}} est disponible</ng-template>
+    <ng-template #elseBlock>{{f.nomFilm}} n'est pas disponible</ng-template>
+
+    <img class="image" [src]='f.imageFilm' [alt]="f.nomFilm"><br>
+
+    <button (click)="onJaime(index)">J'aime</button>
+    {{f.nbJaime}}<br>
+
+    <button (click)="onJaimePas(index)">J'aime pas</button>
+    {{f.nbJeNaimeps}}<br>
+
+  </div>
+</div>
+
+```
